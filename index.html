@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menivara Integrations - Custom Business Automation</title>
+    
+    <!-- 
+        Menivara Integrations Landing Page
+        Version: 2026-02-17
+        Rebranded from Eclectic Dabbler Integrations
+        Based on Maze Creative Agency Template aesthetic
+    -->
+    
+    <style>
+        /* ===== CSS Variables ===== */
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --deep-teal: #1a7a6d;
+            --teal: #20a88a;
+            --shine: #7edcc8;
+            --gold: #daa520;
+            --deep-gold: #b8860b;
+            --text-gray: #333333;
+            --border-color: #000000;
+            --transition-speed: 0.3s;
+        }
+
+        /* ===== Reset & Base Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-gray);
+            background-color: var(--white);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: all var(--transition-speed);
+        }
+
+        /* ===== Layout Utilities ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .container-narrow {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 120px 0;
+        }
+
+        /* ===== Header & Navigation ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 30px 0;
+            background-color: transparent;
+            transition: all var(--transition-speed);
+        }
+
+        .header.scrolled {
+            padding: 15px 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 10px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-image {
+            width: 140px;
+            height: auto;
+        }
+
+        .main-menu {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            list-style: none;
+        }
+
+        .menu-item {
+            padding: 15px 20px;
+            font-size: 18px;
+            transition: all var(--transition-speed);
+            border-radius: 25px;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background-image: linear-gradient(-40deg, var(--deep-gold) 0%, var(--gold) 30%, var(--shine) 48%, var(--shine) 52%, var(--teal) 70%, var(--deep-teal) 100%);
+            color: var(--white);
+        }
+
+        .menu-button {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .menu-button span {
+            width: 25px;
+            height: 2px;
+            background-color: var(--black);
+            transition: all var(--transition-speed);
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            background-color: var(--black);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 220px 20px 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            color: var(--white);
+            font-size: clamp(60px, 12vw, 180px);
+            font-weight: 300;
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+        }
+
+        .hero-subtitle {
+            color: var(--white);
+            font-size: clamp(18px, 2.5vw, 24px);
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+
+        .hero-cta {
+            margin-top: 50px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1s forwards;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-image: linear-gradient(-40deg, var(--deep-gold) 0%, var(--gold) 30%, var(--shine) 48%, var(--shine) 52%, var(--teal) 70%, var(--deep-teal) 100%);
+            color: var(--white);
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: lowercase;
+            transition: all var(--transition-speed);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(32, 168, 138, 0.5);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: lowercase;
+            transition: all var(--transition-speed);
+            border: 2px solid var(--white);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--white);
+            color: var(--black);
+        }
+
+        /* ===== Services Section ===== */
+        .services {
+            background-color: var(--white);
+        }
+
+        .section-title {
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            padding: 50px 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            transition: all var(--transition-speed);
+            background-color: var(--white);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+
+        .service-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .service-description {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        /* ===== Process Section ===== */
+        .process {
+            background-color: #f8f8f8;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .process-step {
+            text-align: center;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background-image: linear-gradient(-40deg, var(--deep-gold) 0%, var(--gold) 30%, var(--shine) 48%, var(--shine) 52%, var(--teal) 70%, var(--deep-teal) 100%);
+            border-radius: 50%;
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--black);
+            margin-bottom: 30px;
+        }
+
+        .step-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .step-description {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        /* ===== FAQ Section ===== */
+        .faq {
+            background-color: var(--white);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 600;
+            transition: all var(--transition-speed);
+        }
+
+        .faq-question:hover {
+            color: #555;
+        }
+
+        .faq-toggle {
+            font-size: 28px;
+            font-weight: 300;
+            transition: transform var(--transition-speed);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-speed) ease-out;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 0 30px 0;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        /* ===== Contact Section ===== */
+        .contact {
+            background-color: #f8f8f8;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-top: 60px;
+        }
+
+        .contact-info h3 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all var(--transition-speed);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(197, 38, 37, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 80px 0 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-about h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer-about p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .footer-links h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            font-size: 16px;
+            transition: all var(--transition-speed);
+        }
+
+        .footer-links a:hover {
+            color: var(--teal);
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid #333;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 1024px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-menu {
+                display: none;
+            }
+
+            .menu-button {
+                display: flex;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .hero {
+                padding: 180px 20px 80px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Menivara Integrations" class="logo-image" />
+                </div>
+                
+                <ul class="main-menu">
+                    <li><a href="#home" class="menu-item">Home</a></li>
+                    <li><a href="#services" class="menu-item">Services</a></li>
+                    <li><a href="#process" class="menu-item">Process</a></li>
+                    <li><a href="#faq" class="menu-item">FAQ</a></li>
+                    <li><a href="#contact" class="menu-item">Contact</a></li>
+                </ul>
+
+                <div class="menu-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Automate<br/>Everything</h1>
+            <p class="hero-subtitle">
+                Custom integrations that connect your business tools, eliminate repetitive work, 
+                and let you focus on what actually matters.
+            </p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn-primary">Start a Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">What We Build</h2>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">&#x1F517;</div>
+                    <h3 class="service-title">API Integrations</h3>
+                    <p class="service-description">
+                        Connect your disparate tools and systems. We build custom integrations 
+                        that sync data automatically between platforms, eliminating manual data entry 
+                        and reducing errors.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">&#x26A1;</div>
+                    <h3 class="service-title">Workflow Automation</h3>
+                    <p class="service-description">
+                        Turn repetitive multi-step processes into single-click actions. From lead 
+                        routing to report generation, we automate the tasks that waste your time.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">&#x1F4CA;</div>
+                    <h3 class="service-title">Data Pipeline Design</h3>
+                    <p class="service-description">
+                        Build reliable data flows that keep your teams informed. We create pipelines 
+                        that aggregate, transform, and route data exactly where it needs to go.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">&#x1F916;</div>
+                    <h3 class="service-title">AI-Powered Tools</h3>
+                    <p class="service-description">
+                        Leverage Claude and other AI models to handle content generation, data analysis, 
+                        and decision support. We embed intelligence into your workflows.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="process">
+        <div class="container">
+            <h2 class="section-title">How We Work</h2>
+            
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Discovery</h3>
+                    <p class="step-description">
+                        We map your current workflows, identify pain points, and understand your 
+                        systems architecture. This isn't a sales call&mdash;it's a technical consultation.
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Design</h3>
+                    <p class="step-description">
+                        We architect the solution, define integration points, and create a technical 
+                        specification. You'll know exactly what's being built and why.
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Build</h3>
+                    <p class="step-description">
+                        We develop the automation using platforms like n8n, Make, or custom code. 
+                        Every integration includes error handling, monitoring, and documentation.
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Deploy &amp; Support</h3>
+                    <p class="step-description">
+                        We test thoroughly, deploy to production, and train your team. Ongoing support 
+                        ensures your automations stay reliable as your business evolves.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Common Questions</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What platforms can you integrate?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We work with virtually any platform that has an API&mdash;from major platforms like 
+                            Slack, Google Workspace, ClickUp, and Salesforce to niche industry tools. If it 
+                            has an API or integration capability, we can likely connect it.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does it take to implement an automation?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Timeline varies based on complexity. Simple automations can be deployed in a few days, 
+                            while comprehensive multi-system integrations may take several weeks. We'll provide a 
+                            detailed timeline during the discovery phase.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What happens if something breaks?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            All our automations include monitoring and error handling. If an issue occurs, we're alerted 
+                            immediately and work to resolve it quickly. Our support packages ensure you're never left 
+                            dealing with broken workflows alone.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do I need technical knowledge to use these automations?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            No technical knowledge is required. We design automations to run seamlessly in the background. 
+                            We also provide documentation and training so your team understands what's happening and can 
+                            make simple adjustments if needed.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can automations be modified as my business changes?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Absolutely. We build flexible solutions that can evolve with your business. Whether you add 
+                            new tools, change workflows, or scale operations, we can adjust your automations accordingly.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Ready to streamline your business?</h3>
+                    <p>
+                        Let's discuss how custom automation can transform your operations. 
+                        Fill out the form and we'll get back to you within 24 hours.
+                    </p>
+                    <p>
+                        Our approach focuses on reliability, scalability, and seamless 
+                        integration with your existing systems.
+                    </p>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company" placeholder="Your company name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Project Details</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your automation needs..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>Menivara Integrations</h3>
+                    <p>
+                        Custom automation solutions that connect your business tools 
+                        and eliminate repetitive work. We build reliable, scalable 
+                        integrations tailored to your specific needs.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#process">Process</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Menivara Integrations. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active menu item on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Close other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // Form submission → n8n webhook
+        const contactForm = document.getElementById('contactForm');
+        const WEBHOOK_URL = 'https://menivara.app.n8n.cloud/webhook/contact-form';
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    contactForm.reset();
+                    submitBtn.textContent = 'Message Sent!';
+                    submitBtn.style.opacity = '0.7';
+                    setTimeout(function() {
+                        submitBtn.textContent = originalText;
+                        submitBtn.style.opacity = '1';
+                        submitBtn.disabled = false;
+                    }, 3000);
+                } else {
+                    throw new Error(result.message || 'Something went wrong');
+                }
+            } catch (err) {
+                submitBtn.textContent = 'Error - Try Again';
+                submitBtn.style.opacity = '0.7';
+                setTimeout(function() {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
