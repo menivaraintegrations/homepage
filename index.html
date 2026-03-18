@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menivara - Practical Help for Businesses That Work Too Hard</title>
+
+    <!--
+        Menivara Landing Page
+        Version: 2026-03-17
+        Rebranded from Menivara Integrations to Menivara
+        Conversational, first-person, consulting-broad
+    -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS Variables ===== */
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --deep-teal: #1a7a6d;
+            --teal: #20a88a;
+            --shine: #7edcc8;
+            --gold: #daa520;
+            --deep-gold: #b8860b;
+            --text-gray: #333333;
+            --border-color: #000000;
+            --transition-speed: 0.3s;
+        }
+
+        /* ===== Reset & Base Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-gray);
+            background-color: var(--white);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: all var(--transition-speed);
+        }
+
+        /* ===== Layout Utilities ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .container-narrow {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 120px 0;
+        }
+
+        /* ===== Header & Navigation ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 30px 0;
+            background-color: transparent;
+            transition: all var(--transition-speed);
+        }
+
+        .header.scrolled {
+            padding: 15px 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            padding: 10px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-image {
+            width: 140px;
+            height: auto;
+        }
+
+        .main-menu {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            list-style: none;
+        }
+
+        .menu-item {
+            padding: 15px 20px;
+            font-size: 18px;
+            transition: all var(--transition-speed);
+            border-radius: 25px;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background-image: linear-gradient(-40deg, var(--deep-gold) 0%, var(--gold) 30%, var(--shine) 48%, var(--shine) 52%, var(--teal) 70%, var(--deep-teal) 100%);
+            color: var(--white);
+        }
+
+        .menu-button {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .menu-button span {
+            width: 25px;
+            height: 2px;
+            background-color: var(--black);
+            transition: all var(--transition-speed);
+        }
+
+        /* ===== Mobile Menu ===== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            list-style: none;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu .menu-item {
+            font-size: 24px;
+            padding: 15px 30px;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            background-color: var(--black);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 220px 20px 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-title {
+            color: var(--white);
+            font-size: clamp(48px, 10vw, 140px);
+            font-weight: 300;
+            line-height: 1.0;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+        }
+
+        .hero-subtitle {
+            color: #ccc;
+            font-size: clamp(18px, 2.5vw, 22px);
+            line-height: 1.6;
+            max-width: 650px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+
+        .hero-cta {
+            margin-top: 50px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1s forwards;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-image: linear-gradient(-40deg, var(--deep-gold) 0%, var(--gold) 30%, var(--shine) 48%, var(--shine) 52%, var(--teal) 70%, var(--deep-teal) 100%);
+            color: var(--white);
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: lowercase;
+            transition: all var(--transition-speed);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(32, 168, 138, 0.5);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--white);
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: lowercase;
+            transition: all var(--transition-speed);
+            border: 2px solid var(--white);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--white);
+            color: var(--black);
+        }
+
+        /* ===== Problem Section ===== */
+        .problem {
+            background-color: var(--white);
+        }
+
+        .problem-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .problem-content p {
+            font-size: clamp(18px, 2vw, 22px);
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .problem-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: var(--deep-teal);
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-subtitle {
+            font-size: clamp(18px, 2vw, 22px);
+            text-align: center;
+            color: #666;
+            max-width: 700px;
+            margin: -60px auto 80px;
+            line-height: 1.6;
+        }
+
+        /* ===== Services Section ===== */
+        .services {
+            background-color: #f8f8f8;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            padding: 50px 40px;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            transition: all var(--transition-speed);
+            background-color: var(--white);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+
+        .service-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .service-description {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        /* ===== Process Section ===== */
+        .process {
+            background-color: var(--white);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .process-grid::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--teal), var(--gold));
+            z-index: 0;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background-image: linear-gradient(-40deg, var(--deep-gold) 0%, var(--gold) 30%, var(--shine) 48%, var(--shine) 52%, var(--teal) 70%, var(--deep-teal) 100%);
+            border-radius: 50%;
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--black);
+            margin-bottom: 30px;
+        }
+
+        .step-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .step-description {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        /* ===== About Section ===== */
+        .about {
+            background-color: var(--black);
+            color: var(--white);
+        }
+
+        .about .section-title {
+            color: var(--white);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            font-size: clamp(16px, 1.5vw, 20px);
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 25px;
+        }
+
+        .about-content .highlight {
+            color: var(--shine);
+        }
+
+        /* ===== FAQ Section ===== */
+        .faq {
+            background-color: #f8f8f8;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 600;
+            transition: all var(--transition-speed);
+        }
+
+        .faq-question:hover {
+            color: #555;
+        }
+
+        .faq-toggle {
+            font-size: 28px;
+            font-weight: 300;
+            transition: transform var(--transition-speed);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-speed) ease-out;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 0 30px 0;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        /* ===== Contact Section ===== */
+        .contact {
+            background-color: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-top: 60px;
+        }
+
+        .contact-info h3 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .contact-cta-block {
+            margin-top: 30px;
+            padding: 40px;
+            background-color: #f8f8f8;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .contact-cta-block p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all var(--transition-speed);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(32, 168, 138, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 80px 0 40px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-about h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer-about p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .footer-links h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            font-size: 16px;
+            transition: all var(--transition-speed);
+        }
+
+        .footer-links a:hover {
+            color: var(--teal);
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid #333;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 1024px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-menu {
+                display: none;
+            }
+
+            .menu-button {
+                display: flex;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .hero {
+                padding: 180px 20px 80px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Menivara" class="logo-image" />
+                </div>
+
+                <ul class="main-menu">
+                    <li><a href="#home" class="menu-item">Home</a></li>
+                    <li><a href="#services" class="menu-item">How I Help</a></li>
+                    <li><a href="#process" class="menu-item">Process</a></li>
+                    <li><a href="#about" class="menu-item">About</a></li>
+                    <li><a href="#contact" class="menu-item">Contact</a></li>
+                </ul>
+
+                <div class="menu-button" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <ul class="mobile-menu" id="mobileMenu">
+        <li><a href="#home" class="menu-item">Home</a></li>
+        <li><a href="#services" class="menu-item">How I Help</a></li>
+        <li><a href="#process" class="menu-item">Process</a></li>
+        <li><a href="#about" class="menu-item">About</a></li>
+        <li><a href="#contact" class="menu-item">Contact</a></li>
+    </ul>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">I help businesses stop fighting their own tools.</h1>
+            <p class="hero-subtitle">
+                Something in your business is taking longer than it should.
+                You probably know what it is. I find the fix and build it&mdash;whether
+                that's an automation, a better process, or just connecting things that
+                should already be talking to each other.
+            </p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn-primary">let's talk</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="problem">
+        <div class="container">
+            <div class="problem-content">
+                <p>
+                    You know that spreadsheet someone updates every Friday?
+                    The one that takes two hours and nobody enjoys?
+                </p>
+                <p>
+                    Or the three tools your team uses that don't talk to each other,
+                    so someone copies data between them manually?
+                </p>
+                <p>
+                    Or the report your boss asks for monthly that requires pulling
+                    numbers from four different places?
+                </p>
+                <p>
+                    <span class="highlight">That stuff doesn't have to be that way.</span>
+                    Most businesses have operational friction they've just learned to live with.
+                    An outside set of eyes with the right toolkit can fix it faster than you think.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">How I Can Help</h2>
+            <p class="section-subtitle">
+                I don't sell packages. I listen to what's broken
+                and figure out the right fix. Here's the kind of stuff I work on:
+            </p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">&#x1F50D;</div>
+                    <h3 class="service-title">Process Diagnosis</h3>
+                    <p class="service-description">
+                        Where is time being wasted and why? Sometimes the answer isn't new software&mdash;it's
+                        using what you already have in a smarter way.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">&#x1F517;</div>
+                    <h3 class="service-title">Tool Integration</h3>
+                    <p class="service-description">
+                        Your CRM, calendar, invoicing, and email should talk to each other.
+                        I connect the tools you already use so data flows where it needs to go.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">&#x26A1;</div>
+                    <h3 class="service-title">Workflow Automation</h3>
+                    <p class="service-description">
+                        That thing you do every Monday morning for two hours?
+                        Let's make it take five minutes. I build automations that handle
+                        the repetitive stuff so your team doesn't have to.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">&#x1F4CA;</div>
+                    <h3 class="service-title">Data Organization</h3>
+                    <p class="service-description">
+                        Your information exists but it's scattered across six spreadsheets
+                        and someone's email. I bring it together so you can actually use it.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">&#x1F916;</div>
+                    <h3 class="service-title">AI Implementation</h3>
+                    <p class="service-description">
+                        There are AI tools that can handle 80% of tasks you're doing manually.
+                        I'll show you which ones make sense for your business and set them up.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">&#x1F4A1;</div>
+                    <h3 class="service-title">Operational Clarity</h3>
+                    <p class="service-description">
+                        You don't always need new software. Sometimes you need to stop
+                        using the software you have in the wrong way. I help you see the difference.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="process">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">
+                No long proposals. No jargon. Just a straightforward path from
+                "something's not working" to "that's fixed now."
+            </p>
+
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Discovery</h3>
+                    <p class="step-description">
+                        We have a conversation about what's frustrating you.
+                        No pitch, no proposal template&mdash;just listening.
+                        I'll identify the things that are costing you time or money.
+                        This one's free.
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Quick Win</h3>
+                    <p class="step-description">
+                        I scope a small, contained project&mdash;usually 1-2 weeks.
+                        Fixed price, clear outcome. You see results fast without
+                        committing to a huge engagement. This is where trust gets built.
+                    </p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Ongoing</h3>
+                    <p class="step-description">
+                        If the quick win goes well and there's more to tackle,
+                        we can set up an ongoing relationship. Flexible scope,
+                        month to month. Some months heavy, some months light.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">The Person Behind This</h2>
+
+            <div class="about-content">
+                <p>
+                    I'm Andrew. My career path has been... eclectic. Restaurant general manager.
+                    Marketing director. The guy who kept saying "there has to be a better way to do this"
+                    until he started actually building the better way.
+                </p>
+                <p>
+                    I don't come from a software engineering background. I come from operations&mdash;from
+                    managing real teams, real margins, and real chaos. That means when I look at your business,
+                    I'm not thinking about what's technically elegant.
+                    <span class="highlight">I'm thinking about what actually saves you time and money.</span>
+                </p>
+                <p>
+                    I work with automation platforms, AI tools, and a healthy dose of common sense.
+                    The combination lets me solve problems that are too technical for most business consultants
+                    and too practical for most developers.
+                </p>
+                <p>
+                    I'm honest about what I know and what I'm figuring out. If something's outside my wheelhouse,
+                    I'll tell you. If the answer is "you don't need me for this," I'll tell you that too.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Questions You Might Have</h2>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What kind of businesses do you work with?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Mostly small and mid-size businesses&mdash;5 to 50 employees. The kind where the owner
+                            or operations manager is the decision maker, not a procurement committee. I work across
+                            industries but have the most experience with manufacturing, food service, retail,
+                            trades, and professional services.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How much does this cost?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            The discovery call is free. Quick win projects typically range from $500 to $2,500
+                            depending on complexity. Larger projects and ongoing retainers are scoped individually.
+                            I price on value delivered, not hours worked&mdash;a two-hour fix that saves you
+                            ten hours a week is worth more than two hours of billing.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do I need to be technical?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Not at all. If you can describe what's frustrating you in plain language, that's
+                            all I need. I handle the technical side. When I'm done, I'll make sure you and
+                            your team understand what was built and how to use it.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What if I'm not sure what the problem is?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            That's fine&mdash;and honestly pretty common. You know something is inefficient
+                            but can't pinpoint exactly what. That's what the discovery conversation is for.
+                            I ask questions, you describe your day-to-day, and usually the problems
+                            become obvious pretty quickly.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What tools and platforms do you use?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            I'm platform-flexible. I work with Make.com, n8n, Google Workspace, ClickUp,
+                            various AI tools, and whatever else fits the situation. I don't push any particular
+                            tool&mdash;I use what makes sense for your specific problem and what your team
+                            is already comfortable with.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Figure It Out</h2>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Start with a conversation.</h3>
+                    <p>
+                        No commitment, no pitch deck, no pressure. Just tell me what's
+                        going on in your business and I'll tell you honestly whether I can help.
+                    </p>
+                    <p>
+                        The easiest way to get started is booking a free discovery call.
+                        We'll talk for 30-60 minutes about what's frustrating you, and
+                        I'll come back with some ideas.
+                    </p>
+                    <div class="contact-cta-block">
+                        <p>Prefer to write it out? Use the form and I'll get back to you within a day.</p>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Business</label>
+                        <input type="text" id="company" name="company" placeholder="Your business name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">What's going on?</label>
+                        <textarea id="message" name="message" placeholder="Tell me what's frustrating you. No need to be technical&mdash;just describe the problem." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">send message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>Menivara</h3>
+                    <p>
+                        Practical help for businesses that work too hard on things that
+                        should be easier. Based on listening first, fixing second, and
+                        being honest about both.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Navigate</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">How I Help</a></li>
+                        <li><a href="#process">Process</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Menivara. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('.menu-item').forEach(function(link) {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active menu item on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const menuItems = document.querySelectorAll('.main-menu .menu-item');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+
+            question.addEventListener('click', () => {
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+
+                item.classList.toggle('active');
+            });
+        });
+
+        // Form submission -> n8n webhook
+        const contactForm = document.getElementById('contactForm');
+        const WEBHOOK_URL = 'https://menivara.app.n8n.cloud/webhook/contact-form';
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'sending...';
+
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    contactForm.reset();
+                    submitBtn.textContent = 'message sent!';
+                    submitBtn.style.opacity = '0.7';
+                    setTimeout(function() {
+                        submitBtn.textContent = originalText;
+                        submitBtn.style.opacity = '1';
+                        submitBtn.disabled = false;
+                    }, 3000);
+                } else {
+                    throw new Error(result.message || 'Something went wrong');
+                }
+            } catch (err) {
+                submitBtn.textContent = 'error - try again';
+                submitBtn.style.opacity = '0.7';
+                setTimeout(function() {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
